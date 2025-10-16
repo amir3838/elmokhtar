@@ -1,0 +1,185 @@
+# Create the HTML file for the multi-page menu
+html_content = '''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فسخاني المختار - منيو إلكتروني</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">فسخاني المختار</h1>
+                <div class="header-actions">
+                    <button class="cart-btn" id="cart-btn">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <div class="page active" id="home-page">
+                <div class="welcome-section">
+                    <h2>أهلاً بكم في فسخاني المختار</h2>
+                    <p>اختر القسم المطلوب</p>
+                </div>
+                
+                <div class="categories-grid">
+                    <button class="category-btn" data-category="salted-fish">
+                        <span class="category-icon">🐟</span>
+                        <span class="category-name">الأسماك المملحة</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="fillet-fish">
+                        <span class="category-icon">🍽️</span>
+                        <span class="category-name">الأسماك الفيليه</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="caviar-roe">
+                        <span class="category-icon">🥚</span>
+                        <span class="category-name">البطارخ والكافيار</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="other-items">
+                        <span class="category-icon">🐠</span>
+                        <span class="category-name">أصناف أخرى</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="individual-meals">
+                        <span class="category-icon">🍽️</span>
+                        <span class="category-name">وجبات فردية</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="appetizers">
+                        <span class="category-icon">🥗</span>
+                        <span class="category-name">مقبلات</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="sandwiches">
+                        <span class="category-icon">🥪</span>
+                        <span class="category-name">سندويشات</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="salads-additions">
+                        <span class="category-icon">🥬</span>
+                        <span class="category-name">السلطات والإضافات</span>
+                    </button>
+                    
+                    <button class="category-btn" data-category="family-meals">
+                        <span class="category-icon">👨‍👩‍👧‍👦</span>
+                        <span class="category-name">وجبات عائلية</span>
+                    </button>
+                </div>
+                
+                <div class="bottom-nav">
+                    <button class="nav-btn" id="branches-btn">
+                        <span class="nav-icon">📍</span>
+                        <span>فروعنا</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Pages -->
+            <div class="page" id="category-page">
+                <div class="page-header">
+                    <button class="back-btn" id="back-to-home">← العودة للرئيسية</button>
+                    <h2 id="category-title">القسم</h2>
+                </div>
+                <div class="products-container" id="products-container">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Cart Page -->
+            <div class="page" id="cart-page">
+                <div class="page-header">
+                    <button class="back-btn" id="back-from-cart">← العودة</button>
+                    <h2>السلة</h2>
+                </div>
+                <div class="cart-content">
+                    <div id="cart-items"></div>
+                    <div class="cart-summary" id="cart-summary">
+                        <div class="summary-row">
+                            <span>الإجمالي الفرعي:</span>
+                            <span id="subtotal">0 جنيه</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>الضرائب والرسوم:</span>
+                            <span>0 جنيه</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>الإجمالي النهائي:</span>
+                            <span id="total">0 جنيه</span>
+                        </div>
+                        <button class="checkout-btn" id="checkout-btn">إتمام الطلب</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout Page -->
+            <div class="page" id="checkout-page">
+                <div class="page-header">
+                    <button class="back-btn" id="back-from-checkout">← العودة للسلة</button>
+                    <h2>إتمام الطلب</h2>
+                </div>
+                <div class="checkout-content">
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="customer-name">اسم العميل *</label>
+                            <input type="text" id="customer-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customer-phone">رقم الهاتف *</label>
+                            <input type="tel" id="customer-phone" required pattern="[0-9+]{11,14}" placeholder="01000000000">
+                            <small>11 رقم مصري أو يبدأ بـ +20</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customer-address">العنوان التفصيلي *</label>
+                            <textarea id="customer-address" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="button" id="location-btn" class="location-btn">
+                                <span class="location-icon">📍</span>
+                                تحديد موقعي
+                            </button>
+                            <div id="location-status"></div>
+                            <div id="location-info"></div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">إرسال الطلب عبر الواتساب</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Branches Page -->
+            <div class="page" id="branches-page">
+                <div class="page-header">
+                    <button class="back-btn" id="back-from-branches">← العودة للرئيسية</button>
+                    <h2>فروعنا</h2>
+                </div>
+                <div class="branches-container">
+                    <!-- Branches will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>'''
+
+# Write HTML file
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("✅ index.html file created successfully")
