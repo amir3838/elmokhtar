@@ -2,7 +2,7 @@
 const menuData = {
     storeName: "فسخاني المختار",
     whatsappNumber: "+201000348425",
-    noteText: "سعر الكيلو قبل التخلي (ليس بعد التخلي)",
+    noteText: "السعر يختلف حسب الجرامات التي فوق أو تحت الوزن",
 
     // Product images mapping - Updated with all available images
     productImages: {
@@ -847,6 +847,62 @@ function handleSearch() {
     loadCategoryProducts(searchResults);
     showPage('category');
 }
+
+// Video Auto-play Functions
+function initVideoAutoPlay() {
+    const videos = document.querySelectorAll('.celeb-video');
+
+    // Intersection Observer for auto-play when video comes into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                // Video is visible, play it
+                video.play().catch(e => {
+                    console.log('Auto-play prevented:', e);
+                });
+            } else {
+                // Video is not visible, pause it
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.5 // Play when 50% of video is visible
+    });
+
+    // Add hover events for desktop
+    videos.forEach(video => {
+        // Add to intersection observer
+        observer.observe(video);
+
+        // Hover events for desktop
+        video.addEventListener('mouseenter', () => {
+            video.play().catch(e => {
+                console.log('Hover play prevented:', e);
+            });
+        });
+
+        video.addEventListener('mouseleave', () => {
+            video.pause();
+        });
+
+        // Touch events for mobile
+        video.addEventListener('touchstart', () => {
+            if (video.paused) {
+                video.play().catch(e => {
+                    console.log('Touch play prevented:', e);
+                });
+            } else {
+                video.pause();
+            }
+        });
+    });
+}
+
+// Initialize video auto-play when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initVideoAutoPlay();
+});
 
 // Make functions global for onclick handlers
 window.addToCart = addToCart;
