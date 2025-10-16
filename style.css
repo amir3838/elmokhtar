@@ -1394,9 +1394,10 @@ body::after {
     }
 
     .videos-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 1rem;
-        max-width: 600px;
+        max-width: 300px;
+        justify-items: center;
     }
 
     .celeb-video {
@@ -1458,6 +1459,17 @@ body::after {
 
     .categories-grid {
         grid-template-columns: 1fr;
+    }
+
+    .videos-container {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        max-width: 280px;
+    }
+
+    .celeb-video {
+        width: 220px;
+        height: 391px; /* 9:16 aspect ratio for small mobile */
     }
 
     .header-content {
